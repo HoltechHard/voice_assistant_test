@@ -1,0 +1,9 @@
+faster-whisper
+sounddevice
+scipy
+numpy
+piper-tts
+requests
+pipwin
+pyaudio
+pathvalidate
