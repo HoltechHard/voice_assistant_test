@@ -1,0 +1,34 @@
+=========================================
+|       MAIN COMMANDS TO RUN PROJECT    |
+=========================================
+
+1) Pipeline of project 
+
+     ________
+    | PERSON | <make question by voice>
+        |
+        v
+==============              ==============              ==========          ============
+| MICROPHONE |      ==>     | STT MODEL  |      ==>     |  TEXT  |    +     |  CONTEXT |
+==============              ==============              ==========          ============
+<speech recogizer>        <speech-to-text            <generated question   <external information +
+                            decodifier>                     text>            instructions>
+                                                       \______________________________/                                                        
+                                                                        |
+                                                                        v
+                                                             =====================
+                                                             | OLLAMA LLM MODEL  |
+                                                             =====================
+                                                                <brain processor
+                                                                generate answer>
+                                                                       |    
+                                                                       V
+==============                  ==============                     ===========
+|   AUDIO    |       <==        | TTS MODEL  |         <==         |  TEXT   |
+==============                  ==============                     ===========
+<audio generator>               <text-to-speech                  <generated answer
+                                  decodifier>                         text>
+
+
+
+
