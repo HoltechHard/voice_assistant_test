@@ -5,51 +5,17 @@ from telethon import TelegramClient
 
 from text_to_voice_bot import tts_operation
 from voice_to_text_bot import stt_operation
+from language_config import configure_language
+from language_config import configure_voice_model
 
 # --- Configuration ---
 API_ID = os.environ.get("API_ID")
 API_HASH = os.environ.get("API_HASH")
 BOT_USERNAME = os.environ.get("BOT_USERNAME")
 
-async def configure_language(client):
-    """Sends the command to configure the language."""
-    print(f"Configuring Language for {BOT_USERNAME}...")
-    await client.send_message(BOT_USERNAME, "🌐 Language")
-    await asyncio.sleep(1)
-    
-    # Wait for the bot's response with language options
-    history = await client.get_messages(BOT_USERNAME, limit=1)
-    if history and history[0].text:
-        print("\n[Bot Language Options]:")
-        print(history[0].text)
-        
-    lang_choice = input("\nEnter the exact text of the language button you want to select (or press Enter to skip): ").strip()
-    if lang_choice:
-        await client.send_message(BOT_USERNAME, lang_choice)
-        await asyncio.sleep(1)
-        print("Language selection sent.")
-
-async def configure_voice_model(client):
-    """Sends the command to configure the voice model."""
-    print(f"Configuring Voice Model for {BOT_USERNAME}...")
-    await client.send_message(BOT_USERNAME, "🗣️ Voice Model")
-    await asyncio.sleep(1)
-    
-    # Wait for the bot's response with voice model options
-    history = await client.get_messages(BOT_USERNAME, limit=1)
-    if history and history[0].text:
-        print("\n[Bot Voice Model Options]:")
-        print(history[0].text)
-        
-    model_choice = input("\nEnter the exact text of the voice model button you want to select (or press Enter to skip): ").strip()
-    if model_choice:
-        await client.send_message(BOT_USERNAME, model_choice)
-        await asyncio.sleep(1)
-        print("Voice model selection sent.")
-
 
 async def async_main():
-    global API_ID, API_HASH
+    global API_ID, API_HASH, BOT_USERNAME
     
     print("=== Telegram Bot Client Setup ===")
     if not API_ID or not API_HASH:
@@ -57,6 +23,7 @@ async def async_main():
         load_dotenv()
         API_ID = os.environ.get("API_ID")
         API_HASH = os.environ.get("API_HASH")
+        BOT_USERNAME = os.environ.get("BOT_USERNAME")   
 
     if not API_ID or not API_HASH:
         print("Missing API credentials.")
@@ -101,9 +68,9 @@ async def async_main():
             elif choice == '2':
                 await stt_operation(client, BOT_USERNAME)
             elif choice == '3':
-                await configure_language(client)
+                await configure_language(client, BOT_USERNAME)
             elif choice == '4':
-                await configure_voice_model(client)
+                await configure_voice_model(client, BOT_USERNAME)
             elif choice == '5':
                 print("Exiting...")
                 break
