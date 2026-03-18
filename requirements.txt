@@ -7,3 +7,14 @@ requests
 pipwin
 pyaudio
 pathvalidate
+transformers
+torch
+vosk
+ctranslate2
+torchvision
+torchaudio
+nemo_toolkit[asr]
+telethon
+pygame
+pydub
+python-dotenv
